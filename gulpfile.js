@@ -9,7 +9,17 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
     cache = require('gulp-cache'),
+    fileinclude = require('gulp-file-include'),
     autoprefixer = require('gulp-autoprefixer');
+
+gulp.task('fileinclude', function () {
+    return gulp.src('app/templates/*.html')
+        .pipe(fileinclude({
+            prefix: '@@',
+            basepath: '@file'
+        }))
+        .pipe(gulp.dest('app'));
+});
 
 gulp.task('less', function () {
     return gulp.src(['app/less/main.less', 'app/less/libs.less'])
@@ -70,7 +80,8 @@ gulp.task('img', function () {
         .pipe(gulp.dest('dist/img'));
 });
 
-gulp.task('watch', ['browser-sync', 'css-libs', 'scripts'], function () {
+gulp.task('watch', ['browser-sync', 'css-libs', 'fileinclude', 'scripts'], function () {
+    gulp.watch('app/templates/*.html', ['fileinclude']);
     gulp.watch('app/less/**/*.less', ['less']);
     gulp.watch('app/*.html', browserSync.reload);
     gulp.watch('app/js/**/*.js', browserSync.reload);
