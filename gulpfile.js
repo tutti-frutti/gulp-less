@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     less = require('gulp-less'),
+    plumber = require('gulp-plumber'),
     browserSync = require('browser-sync'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglifyjs'),
@@ -23,8 +24,16 @@ gulp.task('fileinclude', function () {
 
 gulp.task('less', function () {
     return gulp.src(['app/less/main.less', 'app/less/libs.less'])
+        .pipe(plumber({
+            errorHandler: function (err) {
+                console.log(err);
+                this.emit('end');
+            }
+        }))
         .pipe(less())
-        .pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {cascade: true}))
+        .pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {
+            cascade: true
+        }))
         .pipe(gulp.dest('app/css'))
         .pipe(browserSync.reload({
             stream: true
