@@ -85,41 +85,6 @@ img {
 .up-button:hover {
   opacity: .5;
 }
-.orange-square {
-  display: inline-block;
-  vertical-align: vat;
-  padding: 0 10px;
-  font-size: 15px;
-  line-height: 35px;
-  text-align: center;
-  border: none;
-  color: #fff;
-  background: #e07326;
-  -webkit-transition: .3s;
-  transition: .3s;
-}
-.orange-square:hover,
-.orange-square:focus {
-  text-decoration: none;
-  color: #fff;
-  background: #ff8b38;
-}
-.transparent-square {
-  display: inline-block;
-  vertical-align: vat;
-  padding: 0 10px;
-  font-size: 15px;
-  line-height: 35px;
-  text-align: center;
-  border: 1px solid #fff;
-  color: #fff;
-  background: transparent;
-  -webkit-transition: .3s;
-  transition: .3s;
-}
-.transparent-square:hover,
-.transparent-square:focus {
-  text-decoration: none;
-  color: #fff;
-  background: #505050;
+.standart {
+  color: #000;
 }
