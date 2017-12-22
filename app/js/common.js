@@ -1,3 +1,1 @@
-$(document).ready(function(){
-//   $('p').css('color', 'green'); 
-});
+$(document).ready(function(){});
