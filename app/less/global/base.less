@@ -1,8 +1,15 @@
 body {
+    position: relative;
     margin: 0;
     padding: 0;
     min-width: 320px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Verdana', sans-serif;
+}
+
+.fonts-loaded body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: normal;
 }
 
 li {
@@ -27,6 +34,11 @@ a {
 
 img {
     max-width: 100%;
+}
+
+.ofi {
+    object-fit: cover;
+    font-family: 'object-fit: cover;';
 }
 
 * {
@@ -98,4 +110,10 @@ img {
 
 .up-button:hover {
     opacity: .5;
+}
+
+@media (min-width: 1200px) {
+    .container{
+        width: 1200px;
+    }
 }

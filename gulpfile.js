@@ -11,6 +11,8 @@ var gulp = require('gulp'),
     pngquant = require('imagemin-pngquant'),
     cache = require('gulp-cache'),
     fileinclude = require('gulp-file-include'),
+    spritesmith = require('gulp.spritesmith'),
+    zip = require('gulp-zip'),
     autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('fileinclude', function () {
@@ -45,6 +47,12 @@ gulp.task('scripts', function () {
         'app/libs/jquery/dist/jquery.min.js',
         'app/libs/magnific-popup/dist/jquery.magnific-popup.min.js',
         'app/libs/bootstrap/dist/js/bootstrap.min.js',
+        'app/libs/owl.carousel/dist/owl.carousel.min.js',
+        'app/libs/fontfaceobserver/fontfaceobserver.js',
+        'app/libs/fancybox/dist/jquery.fancybox.min.js',
+        'node_modules/selectric/public/jquery.selectric.min.js',
+        'node_modules/unveil2/dist/jquery.unveil2.min.js',
+        'node_modules/object-fit-images/dist/ofi.min.js',
     ])
         .pipe(concat('libs.min.js'))
         .pipe(uglify())
@@ -89,6 +97,25 @@ gulp.task('img', function () {
         })))
         .pipe(gulp.dest('dist/img'));
 });
+
+gulp.task('sprite', function () {
+    var spriteData =
+        gulp.src('./app/img/icons-cab/*.*') // путь, откуда берем картинки для спрайта
+        .pipe(spritesmith({
+            imgName: 'icons-cab-kit.png',
+            cssName: 'icons-cab-kit.css',
+        }));
+
+    spriteData.img.pipe(gulp.dest('./app/img/')); // путь, куда сохраняем картинку
+    spriteData.css.pipe(gulp.dest('./app/css/')); // путь, куда сохраняем стили
+});
+
+gulp.task('zip', () =>
+    gulp.src('dist/**/*')
+        .pipe(zip('prodact.zip'))
+        .pipe(gulp.dest('.'))
+);
+
 
 gulp.task('watch', ['browser-sync', 'css-libs', 'fileinclude', 'scripts'], function () {
     gulp.watch('app/templates/*.html', ['fileinclude']);
